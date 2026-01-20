@@ -24,3 +24,4 @@ profiles.yml
 target/
 dbt_packages/
 logs/
+venv/
