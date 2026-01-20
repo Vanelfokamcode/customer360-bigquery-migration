@@ -1,0 +1,26 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+.Python
+*.egg-info/
+
+# Data files (données = trop lourdes pour Git)
+data/exports/
+powerbi_data/
+*.csv
+
+# Credentials (JAMAIS mettre les mots de passe sur GitHub !)
+*.json
+.env
+profiles.yml
+
+# IDE
+.vscode/
+.idea/
+
+# BigQuery
+.dbt/
+target/
+dbt_packages/
+logs/
