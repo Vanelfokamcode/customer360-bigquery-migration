@@ -25,3 +25,11 @@ target/
 dbt_packages/
 logs/
 venv/
+
+# Data exports (too large for Git)
+data/exports/
+*.csv
+
+# Logs
+logs/
+*.log
