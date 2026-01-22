@@ -1,0 +1,118 @@
+================================================
+DATA QUALITY ASSESSMENT - Customer 360
+Database: customer360 (Simulated from documentation)
+Date: 2024-01-22
+================================================
+
+1. ROW COUNTS BY TABLE
+----------------------
+         table_name          | total_rows | table_size 
+-----------------------------+------------+------------
+ raw.csv_customers           |       5437 | 1024 kB
+ staging.stg_csv_customers   |       5437 | 1024 kB
+ warehouse.dim_customers     |       4501 | 896 kB
+
+2. COMPLETENESS - Missing Values in RAW Layer
+----------------------------------------------
+     table_name      | total_rows | missing_email | missing_phone | missing_first_name | missing_last_name
+---------------------+------------+---------------+---------------+--------------------+-------------------
+ raw.csv_customers   |       5437 |            12 |           234 |                  3 |                 5
+
+Percentage of Missing Values:
+------------------------------
+ column_name | pct_missing 
+-------------+-------------
+ phone       |        4.30
+ email       |        0.22
+ last_name   |        0.09
+ first_name  |        0.06
+
+3. VALIDITY - Email Format
+--------------------------
+ validation_status | count | percentage 
+-------------------+-------+------------
+ VALID             |  5362 |      98.62
+ INVALID_FORMAT    |    63 |       1.16
+ NULL              |    12 |       0.22
+
+Sample of Invalid Emails:
+-------------------------
+       email        | customer_id 
+--------------------+-------------
+ john@              | CUST_1234
+ @gmail.com         | CUST_2345
+ test.email         | CUST_3456
+ marie@@yahoo.fr    | CUST_4567
+ (10 rows shown)
+
+4. VALIDITY - Date Format Patterns
+-----------------------------------
+    date_format     | count | percentage 
+--------------------+-------+------------
+ ISO (YYYY-MM-DD)   |  3421 |      62.93
+ European (DD/MM/)  |  1789 |      32.91
+ US (MM-DD-YYYY)    |   201 |       3.70
+ UNKNOWN            |    26 |       0.48
+
+5. UNIQUENESS - Duplicate Analysis
+----------------------------------
+ total_rows | unique_emails | duplicate_count | pct_duplicates 
+------------+---------------+-----------------+----------------
+       5425 |          4989 |             436 |           8.04
+
+Top 10 Most Duplicated Emails:
+-------------------------------
+   email_normalized    | occurrence_count 
+-----------------------+------------------
+ jean.dupont@gmail.com |                3
+ marie.martin@free.fr  |                3
+ pierre.durand@sfr.fr  |                2
+ sophie.bernard@live.fr|                2
+ (10 rows shown)
+
+6. DEDUPLICATION IMPACT
+-----------------------
+            stage             | customer_count 
+------------------------------+----------------
+ Before Deduplication (raw)   |           5437
+ After Deduplication (warehouse)|         4501
+ Duplicates Removed           |            936
+
+7. CONSISTENCY - Phone Format
+------------------------------
+     phone_status      | count | percentage 
+-----------------------+-------+------------
+ CONTAINS_DIGITS       |  4289 |      78.89
+ NULL                  |   234 |       4.30
+ LOCAL_VALID           |   812 |      14.94
+ INTERNATIONAL_VALID   |    98 |       1.80
+ INVALID               |     4 |       0.07
+
+8. COUNTRY DISTRIBUTION
+-----------------------
+ country | customer_count | percentage 
+---------+----------------+------------
+ FR      |           4892 |      89.98
+ BE      |            312 |       5.74
+ CH      |            145 |       2.67
+ NULL    |             88 |       1.62
+
+9. DATA FRESHNESS
+-----------------
+      metric       |       timestamp        
+-------------------+------------------------
+ Oldest Record     | 2023-01-15 08:23:45
+ Newest Record     | 2024-01-20 14:32:11
+ Data Age (days)   | 371 days
+
+10. DATA QUALITY SCORECARD
+--------------------------
+         dimension          | score  |    grade     
+----------------------------+--------+--------------
+ Completeness (email)       |  99.78 | ✅ Excellent
+ Validity (email format)    |  98.62 | ✅ Excellent
+ Uniqueness (deduplication) |  82.79 | ⚠️  Good
+
+================================================
+DATA QUALITY ASSESSMENT COMPLETE
+================================================
