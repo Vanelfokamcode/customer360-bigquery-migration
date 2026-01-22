@@ -1,0 +1,177 @@
+ table_schema |        table_name         |         column_name          |          data_type          | character_maximum_length | is_nullable 
+--------------+---------------------------+------------------------------+-----------------------------+--------------------------+-------------
+ raw          | csv_customers             | customer_id                  | character varying           |                      100 | NO
+ raw          | csv_customers             | first_name                   | character varying           |                      100 | YES
+ raw          | csv_customers             | last_name                    | character varying           |                      100 | YES
+ raw          | csv_customers             | email                        | character varying           |                      255 | YES
+ raw          | csv_customers             | phone                        | character varying           |                       50 | YES
+ raw          | csv_customers             | address                      | text                        |                          | YES
+ raw          | csv_customers             | city                         | character varying           |                      100 | YES
+ raw          | csv_customers             | country                      | character varying           |                       10 | YES
+ raw          | csv_customers             | created_at                   | character varying           |                       50 | YES
+ raw          | csv_customers             | loaded_at                    | timestamp without time zone |                          | YES
+ raw          | csv_customers             | source_file                  | character varying           |                      255 | YES
+ raw          | transactions              | order_id                     | text                        |                          | YES
+ raw          | transactions              | customer_key                 | text                        |                          | YES
+ raw          | transactions              | transaction_date             | date                        |                          | YES
+ raw          | transactions              | amount                       | numeric                     |                          | YES
+ raw          | transactions              | status                       | text                        |                          | YES
+ staging      | cohort_retention          | cohort_month                 | timestamp with time zone    |                          | YES
+ staging      | cohort_retention          | cohort_size                  | bigint                      |                          | YES
+ staging      | cohort_retention          | months_since_first           | numeric                     |                          | YES
+ staging      | cohort_retention          | active_customers             | bigint                      |                          | YES
+ staging      | cohort_retention          | cohort_revenue               | numeric                     |                          | YES
+ staging      | cohort_retention          | retention_rate               | numeric                     |                          | YES
+ staging      | cohort_retention          | revenue_per_customer         | numeric                     |                          | YES
+ staging      | customer_health           | customer_key                 | text                        |                          | YES
+ staging      | customer_health           | full_name                    | text                        |                          | YES
+ staging      | customer_health           | email                        | text                        |                          | YES
+ staging      | customer_health           | customer_segment             | text                        |                          | YES
+ staging      | customer_health           | health_score                 | integer                     |                          | YES
+ staging      | customer_health           | health_status                | text                        |                          | YES
+ staging      | customer_health           | high_churn_risk              | boolean                     |                          | YES
+ staging      | customer_health           | recency_health               | integer                     |                          | YES
+ staging      | customer_health           | frequency_health             | integer                     |                          | YES
+ staging      | customer_health           | monetary_health              | integer                     |                          | YES
+ staging      | customer_health           | aov_health                   | integer                     |                          | YES
+ staging      | customer_health           | segment_bonus                | integer                     |                          | YES
+ staging      | customer_health           | recency_days                 | integer                     |                          | YES
+ staging      | customer_health           | total_orders                 | bigint                      |                          | YES
+ staging      | customer_health           | total_spent                  | numeric                     |                          | YES
+ staging      | customer_health           | avg_order_value              | numeric                     |                          | YES
+ staging      | customer_health           | calculated_at                | timestamp with time zone    |                          | YES
+ staging      | customer_metrics_advanced | customer_key                 | text                        |                          | YES
+ staging      | customer_metrics_advanced | full_name                    | text                        |                          | YES
+ staging      | customer_metrics_advanced | email                        | text                        |                          | YES
+ staging      | customer_metrics_advanced | total_transactions           | bigint                      |                          | YES
+ staging      | customer_metrics_advanced | lifetime_value               | numeric                     |                          | YES
+ staging      | customer_metrics_advanced | avg_transaction_value        | numeric                     |                          | YES
+ staging      | customer_metrics_advanced | min_transaction              | numeric                     |                          | YES
+ staging      | customer_metrics_advanced | max_transaction              | numeric                     |                          | YES
+ staging      | customer_metrics_advanced | spending_consistency         | numeric                     |                          | YES
+ staging      | customer_metrics_advanced | first_transaction_date       | date                        |                          | YES
+ staging      | customer_metrics_advanced | last_transaction_date        | date                        |                          | YES
+ staging      | customer_metrics_advanced | customer_lifetime_days       | integer                     |                          | YES
+ staging      | customer_metrics_advanced | avg_days_between_purchases   | bigint                      |                          | YES
+ staging      | customer_metrics_advanced | days_since_last_purchase     | integer                     |                          | YES
+ staging      | customer_metrics_advanced | purchases_per_month          | numeric                     |                          | YES
+ staging      | customer_metrics_advanced | revenue_per_day              | numeric                     |                          | YES
+ staging      | customer_metrics_advanced | spending_trend               | text                        |                          | YES
+ staging      | customer_metrics_advanced | predicted_next_purchase_date | timestamp without time zone |                          | YES
+ staging      | customer_metrics_advanced | is_overdue                   | boolean                     |                          | YES
+ staging      | customer_metrics_advanced | calculated_at                | timestamp with time zone    |                          | YES
+ staging      | customer_rfm              | customer_key                 | text                        |                          | YES
+ staging      | customer_rfm              | full_name                    | text                        |                          | YES
+ staging      | customer_rfm              | email                        | text                        |                          | YES
+ staging      | customer_rfm              | recency_days                 | integer                     |                          | YES
+ staging      | customer_rfm              | total_orders                 | bigint                      |                          | YES
+ staging      | customer_rfm              | total_spent                  | numeric                     |                          | YES
+ staging      | customer_rfm              | recency_score                | integer                     |                          | YES
+ staging      | customer_rfm              | frequency_score              | integer                     |                          | YES
+ staging      | customer_rfm              | monetary_score               | integer                     |                          | YES
+ staging      | customer_rfm              | rfm_score                    | text                        |                          | YES
+ staging      | customer_rfm              | customer_segment             | text                        |                          | YES
+ staging      | customer_rfm              | ltv_actual                   | numeric                     |                          | YES
+ staging      | customer_rfm              | ltv_predicted                | numeric                     |                          | YES
+ staging      | customer_rfm              | avg_order_value              | numeric                     |                          | YES
+ staging      | customer_rfm              | first_seen_date              | date                        |                          | YES
+ staging      | customer_rfm              | last_order_date              | date                        |                          | YES
+ staging      | customer_rfm              | first_order_date             | date                        |                          | YES
+ staging      | customer_rfm              | calculated_at                | timestamp with time zone    |                          | YES
+ staging      | dim_customers             | customer_key                 | text                        |                          | YES
+ staging      | dim_customers             | original_customer_id         | character varying           |                      100 | YES
+ staging      | dim_customers             | email                        | text                        |                          | YES
+ staging      | dim_customers             | first_name                   | text                        |                          | YES
+ staging      | dim_customers             | last_name                    | text                        |                          | YES
+ staging      | dim_customers             | full_name                    | text                        |                          | YES
+ staging      | dim_customers             | phone                        | text                        |                          | YES
+ staging      | dim_customers             | address                      | text                        |                          | YES
+ staging      | dim_customers             | city                         | character varying           |                      100 | YES
+ staging      | dim_customers             | country                      | character varying           |                       10 | YES
+ staging      | dim_customers             | first_seen_date              | date                        |                          | YES
+ staging      | dim_customers             | account_created_date         | date                        |                          | YES
+ staging      | dim_customers             | had_duplicates               | boolean                     |                          | YES
+ staging      | dim_customers             | duplicate_count              | bigint                      |                          | YES
+ staging      | dim_customers             | loaded_at                    | timestamp without time zone |                          | YES
+ staging      | dim_customers             | source_file                  | character varying           |                      255 | YES
+ staging      | dim_customers             | dbt_updated_at               | timestamp with time zone    |                          | YES
+ staging      | int_customer_deduped      | customer_key                 | text                        |                          | YES
+ staging      | int_customer_deduped      | original_customer_id         | character varying           |                      100 | YES
+ staging      | int_customer_deduped      | email_clean                  | text                        |                          | YES
+ staging      | int_customer_deduped      | first_name_clean             | text                        |                          | YES
+ staging      | int_customer_deduped      | last_name_clean              | text                        |                          | YES
+ staging      | int_customer_deduped      | phone_clean                  | text                        |                          | YES
+ staging      | int_customer_deduped      | address                      | text                        |                          | YES
+ staging      | int_customer_deduped      | city                         | character varying           |                      100 | YES
+ staging      | int_customer_deduped      | country                      | character varying           |                       10 | YES
+ staging      | int_customer_deduped      | created_at_parsed            | date                        |                          | YES
+ staging      | int_customer_deduped      | duplicate_count              | bigint                      |                          | YES
+ staging      | int_customer_deduped      | loaded_at                    | timestamp without time zone |                          | YES
+ staging      | int_customer_deduped      | source_file                  | character varying           |                      255 | YES
+ staging      | int_customer_deduped      | was_duplicate                | boolean                     |                          | YES
+ staging      | int_customer_fuzzy        | customer_key                 | text                        |                          | YES
+ staging      | int_customer_fuzzy        | original_customer_id         | character varying           |                      100 | YES
+ staging      | int_customer_fuzzy        | email_clean                  | text                        |                          | YES
+ staging      | int_customer_fuzzy        | first_name_clean             | text                        |                          | YES
+ staging      | int_customer_fuzzy        | last_name_clean              | text                        |                          | YES
+ staging      | int_customer_fuzzy        | phone_clean                  | text                        |                          | YES
+ staging      | int_customer_fuzzy        | address                      | text                        |                          | YES
+ staging      | int_customer_fuzzy        | city                         | character varying           |                      100 | YES
+ staging      | int_customer_fuzzy        | country                      | character varying           |                       10 | YES
+ staging      | int_customer_fuzzy        | created_at_parsed            | date                        |                          | YES
+ staging      | int_customer_fuzzy        | duplicate_count              | bigint                      |                          | YES
+ staging      | int_customer_fuzzy        | was_duplicate                | boolean                     |                          | YES
+ staging      | int_customer_fuzzy        | was_fuzzy_matched            | boolean                     |                          | YES
+ staging      | int_customer_fuzzy        | name_soundex                 | text                        |                          | YES
+ staging      | int_customer_fuzzy        | fuzzy_match_key              | text                        |                          | YES
+ staging      | int_customer_fuzzy        | loaded_at                    | timestamp without time zone |                          | YES
+ staging      | int_customer_fuzzy        | source_file                  | character varying           |                      255 | YES
+ staging      | int_customer_identity     | customer_id                  | character varying           |                      100 | YES
+ staging      | int_customer_identity     | email_clean                  | text                        |                          | YES
+ staging      | int_customer_identity     | email_raw                    | character varying           |                      255 | YES
+ staging      | int_customer_identity     | first_name_clean             | text                        |                          | YES
+ staging      | int_customer_identity     | first_name_raw               | character varying           |                      100 | YES
+ staging      | int_customer_identity     | last_name_clean              | text                        |                          | YES
+ staging      | int_customer_identity     | last_name_raw                | character varying           |                      100 | YES
+ staging      | int_customer_identity     | phone_clean                  | text                        |                          | YES
+ staging      | int_customer_identity     | phone_raw                    | character varying           |                       50 | YES
+ staging      | int_customer_identity     | address                      | text                        |                          | YES
+ staging      | int_customer_identity     | city                         | character varying           |                      100 | YES
+ staging      | int_customer_identity     | country                      | character varying           |                       10 | YES
+ staging      | int_customer_identity     | created_at_parsed            | date                        |                          | YES
+ staging      | int_customer_identity     | created_at_raw               | character varying           |                       50 | YES
+ staging      | int_customer_identity     | loaded_at                    | timestamp without time zone |                          | YES
+ staging      | int_customer_identity     | source_file                  | character varying           |                      255 | YES
+ staging      | int_customer_identity     | customer_key                 | text                        |                          | YES
+ staging      | int_customer_identity     | identity_match_key           | text                        |                          | YES
+ staging      | int_customer_identity     | record_rank                  | bigint                      |                          | YES
+ staging      | int_customer_identity     | duplicate_count              | bigint                      |                          | YES
+ staging      | int_customer_identity     | is_golden_record             | boolean                     |                          | YES
+ staging      | stg_csv_customers         | customer_id                  | character varying           |                      100 | YES
+ staging      | stg_csv_customers         | email_clean                  | text                        |                          | YES
+ staging      | stg_csv_customers         | email_raw                    | character varying           |                      255 | YES
+ staging      | stg_csv_customers         | first_name_clean             | text                        |                          | YES
+ staging      | stg_csv_customers         | last_name_clean              | text                        |                          | YES
+ staging      | stg_csv_customers         | first_name_raw               | character varying           |                      100 | YES
+ staging      | stg_csv_customers         | last_name_raw                | character varying           |                      100 | YES
+ staging      | stg_csv_customers         | phone_clean                  | text                        |                          | YES
+ staging      | stg_csv_customers         | phone_raw                    | character varying           |                       50 | YES
+ staging      | stg_csv_customers         | address                      | text                        |                          | YES
+ staging      | stg_csv_customers         | city                         | character varying           |                      100 | YES
+ staging      | stg_csv_customers         | country                      | character varying           |                       10 | YES
+ staging      | stg_csv_customers         | created_at_raw               | character varying           |                       50 | YES
+ staging      | stg_csv_customers         | created_at_parsed            | date                        |                          | YES
+ staging      | stg_csv_customers         | loaded_at                    | timestamp without time zone |                          | YES
+ staging      | stg_csv_customers         | source_file                  | character varying           |                      255 | YES
+ warehouse    | pipeline_metadata         | run_id                       | integer                     |                          | NO
+ warehouse    | pipeline_metadata         | pipeline_name                | character varying           |                      100 | NO
+ warehouse    | pipeline_metadata         | schema_name                  | character varying           |                       50 | NO
+ warehouse    | pipeline_metadata         | table_name                   | character varying           |                      100 | NO
+ warehouse    | pipeline_metadata         | rows_inserted                | integer                     |                          | YES
+ warehouse    | pipeline_metadata         | rows_updated                 | integer                     |                          | YES
+ warehouse    | pipeline_metadata         | run_status                   | character varying           |                       20 | YES
+ warehouse    | pipeline_metadata         | started_at                   | timestamp without time zone |                          | YES
+ warehouse    | pipeline_metadata         | completed_at                 | timestamp without time zone |                          | YES
+ warehouse    | pipeline_metadata         | error_message                | text                        |                          | YES
+(173 rows)
+
