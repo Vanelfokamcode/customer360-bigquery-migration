@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: stg_csv_customers
+    description: Cleaned and validated customer data from raw CSV
+    columns:
+      - name: customer_id
+        description: Unique customer identifier from source system
+        tests:
+          - not_null
+          - unique
+
+      - name: email_clean
+        description: Normalized email (lowercase, trimmed). NULL if invalid.
+        # No not_null test - NULL is valid for invalid emails
+
+      - name: is_valid_email
+        description: Boolean flag indicating if email matches valid format
+        tests:
+          - not_null
+          # accepted_values doesn't work with BOOLEAN in BigQuery
+          # Using custom test instead (see tests/test_is_valid_email_is_boolean.sql)
+
+      - name: created_at_parsed
+        description: Account creation date parsed from mixed formats. NULL if unparseable.
+        # No not_null test - NULL is valid for unparseable dates
+
+      - name: first_name_clean
+        description: Cleaned first name (special chars removed, capitalized)
+
+      - name: last_name_clean
+        description: Cleaned last name (special chars removed, capitalized)
+
+      - name: phone_clean
+        description: Phone number with only digits and + sign
