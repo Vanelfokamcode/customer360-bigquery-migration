@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw_data
+    description: Raw data from PostgreSQL migration
+    database: customer360-migration  # ← CHANGE avec ton project ID !
+    schema: raw_data
+    tables:
+      - name: csv_customers
+        description: Raw customer data (5,000 rows)
+        columns:
+          - name: customer_id
+            description: Unique customer identifier
+          - name: email
+            description: Customer email (may contain invalid formats)
+          - name: created_at
+            description: Account creation date (STRING - mixed formats)
