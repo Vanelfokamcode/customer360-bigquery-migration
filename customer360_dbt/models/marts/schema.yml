@@ -1,3 +1,56 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: |
+      Final customer dimension table for analytics
+      - One row per unique customer
+      - Ready for BI tools and reporting
+      - Includes data quality tiers
+    columns:
+      - name: customer_key
+        description: Primary key - MD5 hash of normalized email
+        tests:
+          - not_null
+          - unique
+      
+      - name: source_customer_id
+        description: Original customer_id from source system
+        tests:
+          - not_null
+      
+      - name: email
+        description: Normalized email address
+      
+      - name: is_valid_email
+        description: Boolean - email passes format validation
+        tests:
+          - not_null
+      
+      - name: full_name
+        description: First name + Last name
+      
+      - name: account_created_at
+        description: Account creation date
+      
+      - name: account_age_days
+        description: Days since account creation
+      
+      - name: data_quality_tier
+        description: |
+          Data completeness classification:
+          - Complete: has valid email, phone, and created_at
+          - Partial: has valid email only
+          - Incomplete: missing valid email
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Complete', 'Partial', 'Incomplete']
+      
+      - name: dbt_updated_at
+        description: Timestamp when this record was last updated by dbt
+        tests:
+          - not_null
 
   - name: customer_metrics
     description: |
@@ -8,12 +61,15 @@
     columns:
       - name: country
         description: Customer country
+      
       - name: total_customers
         description: Count of customers in this segment
         tests:
           - not_null
+      
       - name: pct_valid_email
         description: Percentage with valid email format
+      
       - name: pct_complete_profile
         description: Percentage with complete profiles
 
@@ -27,6 +83,7 @@
         description: Data layer (staging/intermediate/marts)
         tests:
           - not_null
+      
       - name: dedup_status
         description: Deduplication health check
         tests:
@@ -39,9 +96,26 @@
       - Only essential columns
       - No complex types
       - Optimized for dashboard queries
+    columns:
+      - name: customer_key
+        description: Primary key (MD5 hash)
+        tests:
+          - not_null
+          - unique
+      
+      - name: has_valid_email
+        description: Boolean flag - true if email is valid
+      
+      - name: is_complete_profile
+        description: Boolean flag - true if profile is complete
 
   - name: vw_metrics_powerbi
     description: |
       Pre-aggregated metrics for Power BI
+      - Grouped by country, quality, lifecycle
       - Fast dashboard loading
-      - Country and quality tier breakdowns
+    columns:
+      - name: total_customers
+        description: Count of customers in this segment
+        tests:
+          - not_null
